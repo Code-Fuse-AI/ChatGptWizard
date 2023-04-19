@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using ChatGptWizard.Data;
+using MudBlazor.Services;
 
 namespace ChatGptWizard;
 
@@ -16,13 +16,13 @@ public static class MauiProgram
 			});
 
 		builder.Services.AddMauiBlazorWebView();
+        builder.Services.AddMudServices();
+
 
 #if DEBUG
-		builder.Services.AddBlazorWebViewDeveloperTools();
+        builder.Services.AddBlazorWebViewDeveloperTools();
 		builder.Logging.AddDebug();
 #endif
-
-		builder.Services.AddSingleton<WeatherForecastService>();
 
 		return builder.Build();
 	}

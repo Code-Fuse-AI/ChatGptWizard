@@ -5,6 +5,11 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatGptWizard", "ChatGptWizard\ChatGptWizard.csproj", "{E09E0BDA-5877-4C99-90A8-4C58D2019318}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{76D5112E-4142-4D3C-BD47-15D7771FE594}"
+	ProjectSection(SolutionItems) = preProject
+		ChatGptWizard.sln = ChatGptWizard.sln
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

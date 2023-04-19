@@ -1,18 +1,48 @@
 ﻿@inherits LayoutComponentBase
+<MudThemeProvider Theme="MyTheme" @ref="@_mudThemeProvider" />
+<MudDialogProvider />
+<MudSnackbarProvider />
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
+<MudLayout Color="@MyTheme.Palette.Primary">
+    <AppBar OnSidebarToggled="ToggleSidebar" />
+    <NavMenu SideBarOpen="_sidebarOpen" />
+    <MudScrollToTop>
+        <MudFab Color="Color.Primary" Icon="@Icons.Filled.ArrowCircleUp" />
+    </MudScrollToTop>
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+</MudLayout>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+@code{
 
+    private bool _sidebarOpen = false;
+    private void ToggleSidebar() => _sidebarOpen = !_sidebarOpen;
+
+    private MudThemeProvider _mudThemeProvider;
+
+    private MudTheme MyTheme = new MudTheme()
+    {
+        Palette = new Palette()
+        {
+            Primary = "#6187A0",
+            PrimaryLighten = "#8FB5CA",
+            Secondary = "#A9A9A9", // added secondary gray color
+            GrayLight = "#F5F5F",
+            Surface = "#ffffffff",  //Card bg color
+                                    //Dark = "#616161ff",
+                                    //Black = "#000000",
+                                    //White = "#ffffffff",
+            TextPrimary = "#000000",
+            AppbarBackground = "#ffffffff", // set the app bar background color
+
+            //TextSecondary = "rgba(255,255,255, 0.50)",
+            //AppbarBackground = "#ffffffff",
+            //AppbarText = "#000000",
+            //DrawerBackground = "#ffffffff",
+            //DrawerText = "#000000",
+            //DrawerIcon = "#000000"
+        }
+    };
+}
