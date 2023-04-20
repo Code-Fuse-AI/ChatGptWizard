@@ -1,0 +1,22 @@
+﻿
+<div class="flex items-center justify-center h-screen">
+    <div class="relative">
+        <MudIcon Icon="@Icons.Material.Filled.Search" Size="Size.Large" Color="Color.Primary"
+                 Class="cursor-pointer" @onclick="() => isDrawerOpen = true" />
+        <MudDrawer @bind-Open="isDrawerOpen" Variant="DrawerVariant.Temporary" Anchor="Anchor.Bottom">
+            <div class="p-4">
+                <p class="text-lg font-bold">I'm the drawer content!</p>
+                <p class="mt-4">Click anywhere outside the drawer to close it.</p>
+            </div>
+        </MudDrawer>
+        <div class="fixed inset-0 bg-gray-500 opacity-50 z-10"
+             style="display: @((isDrawerOpen) ? "block" : "none")"
+             @onclick="() => isDrawerOpen = false"></div>
+    </div>
+</div>
+
+@code {
+    private bool isDrawerOpen = false;
+}
+
+
