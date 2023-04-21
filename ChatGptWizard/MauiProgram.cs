@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using ChatGptWizard.Service;
+using ChatGptWizard.Service.IService;
+using Microsoft.Extensions.Logging;
 using MudBlazor.Services;
 
 namespace ChatGptWizard;
@@ -14,8 +16,11 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 			});
+		builder.Services.AddDbContext<AppDbContext>();
+        builder.Services.AddScoped<IExternalLibraryService, ExternalLibraryService>();
+        builder.Services.AddScoped<IPromptService, PromptService>();
 
-		builder.Services.AddMauiBlazorWebView();
+        builder.Services.AddMauiBlazorWebView();
         builder.Services.AddMudServices();
 
 
