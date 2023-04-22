@@ -1,6 +1,16 @@
 ﻿@page "/"
-@*<div class="top-0 sticky bg-slate-800 text-white py-4">
-    <h1 class="mt-5 font-black text-center text-3xl tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-green-200 to-yellow-300">ToDo</h1>
-</div>
-<p>Hello World !</p>*@
+
+    <div class="fixed bottom-6 left-0 right-0 flex flex-col items-center">
+        <div class="mx-auto px-4 py-2 my-1">
+            <PromptDrawer></PromptDrawer>
+        </div>
+
+        <div class="w-full mx-auto px-4 py-2 my-1">
+            <InputBox></InputBox>
+        </div>
+
+        <div class="max-w-screen-xl w-full mx-auto py-1">
+            <Footer></Footer>
+        </div>
+    </div>
 
