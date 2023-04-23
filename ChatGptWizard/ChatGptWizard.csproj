@@ -81,4 +81,7 @@
       <Folder Include="Service\" />
       <Folder Include="Service\IService\" />
     </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\ChatGptWizard.Service\ChatGptWizard.Core.csproj" />
+    </ItemGroup>
 </Project>

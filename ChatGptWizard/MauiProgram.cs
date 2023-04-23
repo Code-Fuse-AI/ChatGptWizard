@@ -1,4 +1,9 @@
-﻿using ChatGptWizard.Service;
+﻿using ChatGptWizard.Core.Interfaces;
+using ChatGptWizard.Core.Services;
+using ChatGptWizard.Infrastructure.Context;
+using ChatGptWizard.Infrastructure.Interfaces;
+using ChatGptWizard.Infrastructure.Repository;
+using ChatGptWizard.Service;
 using ChatGptWizard.Service.IService;
 using Microsoft.Extensions.Logging;
 using MudBlazor.Services;
@@ -17,7 +22,10 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 			});
 		builder.Services.AddDbContext<AppDbContext>();
-        builder.Services.AddScoped<IExternalLibraryService, ExternalLibraryService>();
+		builder.Services.AddDbContext<ChatGptWizardDbContext>();
+		builder.Services.AddScoped<IMessageService, MessageService>();
+		builder.Services.AddScoped<IMessageRepository, MessageRepository>();
+		builder.Services.AddScoped<IExternalLibraryService, ExternalLibraryService>();
         builder.Services.AddScoped<IPromptService, PromptService>();
 
         builder.Services.AddMauiBlazorWebView();

@@ -10,9 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		ChatGptWizard.sln = ChatGptWizard.sln
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatGptWizard.Application", "ChatGptWizard.Service\ChatGptWizard.Application.csproj", "{2DCEC16D-8C55-4FDB-93EF-83BEC26806F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatGptWizard.Core", "ChatGptWizard.Service\ChatGptWizard.Core.csproj", "{2DCEC16D-8C55-4FDB-93EF-83BEC26806F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChatGptWizard.Infrastructure", "ChatGptWizard.Infrastructure\ChatGptWizard.Infrastructure.csproj", "{B5368E66-2909-4172-809A-B6E3E31A14B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChatGptWizard.Infrastructure", "ChatGptWizard.Infrastructure\ChatGptWizard.Infrastructure.csproj", "{B5368E66-2909-4172-809A-B6E3E31A14B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
