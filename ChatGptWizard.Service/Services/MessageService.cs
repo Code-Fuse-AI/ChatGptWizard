@@ -12,14 +12,14 @@ namespace ChatGptWizard.Core.Services
         {
             _messageRepository = messageRepository;
         }
-        public Message GetMessage(int id)
+        public async Task<Message> GetMessage(int id)
         {
-            return _messageRepository.GetMessage(id);
+            return await _messageRepository.GetMessage(id);
         }
 
-        public DbSet<Message> GetMessages()
+        public async Task<List<Message>> GetMessages()
         {
-            return _messageRepository.GetMessages();
+            return await _messageRepository.GetMessages();
         }
     }
 }

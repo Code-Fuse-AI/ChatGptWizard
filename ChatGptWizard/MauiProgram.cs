@@ -21,7 +21,7 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 			});
-		builder.Services.AddDbContext<AppDbContext>();
+		//builder.Services.AddDbContext<AppDbContext>();
 		builder.Services.AddDbContext<ChatGptWizardDbContext>();
 		builder.Services.AddScoped<IMessageService, MessageService>();
 		builder.Services.AddScoped<IMessageRepository, MessageRepository>();

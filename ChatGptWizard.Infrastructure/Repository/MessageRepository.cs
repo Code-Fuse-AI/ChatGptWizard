@@ -1,6 +1,7 @@
 ﻿using ChatGptWizard.Infrastructure.Context;
 using ChatGptWizard.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace ChatGptWizard.Infrastructure.Repository
 {
@@ -11,14 +12,32 @@ namespace ChatGptWizard.Infrastructure.Repository
         {
             _context = context;
         }
-        public Message GetMessage(int Id)
+        public async Task<Message> GetMessage(int Id)
         {
-            return _context.Messages.Single(x => x.Id == Id);
+            Message result = null;
+            try
+            {
+                result = await _context.Messages.SingleOrDefaultAsync(x => x.Id == Id);
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message.ToString();
+            }
+            return result;
         }
 
-        public DbSet<Message> GetMessages()
+        public async Task<List<Message>> GetMessages()
         {
-            return _context.Messages;
+            List<Message> result = null;
+            try
+            {
+                result = await _context.Messages.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message.ToString();
+            }
+            return result;
         }
     }
 }

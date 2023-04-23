@@ -5,7 +5,7 @@ namespace ChatGptWizard.Core.Interfaces
 {
     public interface IMessageService
     {
-        public Message GetMessage(int id);
-        public DbSet<Message> GetMessages();
+        public Task<Message> GetMessage(int Id);
+        public Task<List<Message>> GetMessages();
     }
 }

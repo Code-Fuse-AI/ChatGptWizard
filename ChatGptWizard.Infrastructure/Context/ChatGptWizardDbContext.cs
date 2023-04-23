@@ -2,13 +2,11 @@
 
 namespace ChatGptWizard.Infrastructure.Context
 {
-    public class ChatGptWizardDbContext:DbContext
+    public class ChatGptWizardDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlite(@"Data Source=ChatGptWizard.db");
-        }
         public DbSet<Message> Messages { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) => optionsBuilder.UseSqlite(@"Data Source=ChatGptWizard.db");
+       
     }
 }

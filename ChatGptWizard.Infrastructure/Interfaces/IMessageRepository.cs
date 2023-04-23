@@ -5,7 +5,7 @@ namespace ChatGptWizard.Infrastructure.Interfaces
 {
     public interface IMessageRepository
     {
-        public Message GetMessage(int id);
-        public DbSet<Message> GetMessages();
+        public Task<Message> GetMessage(int Id);
+        public Task<List<Message>> GetMessages();
     }
 }
