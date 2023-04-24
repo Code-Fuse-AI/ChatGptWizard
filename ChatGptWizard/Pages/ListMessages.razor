@@ -73,14 +73,12 @@
                                             </div>
                                             <!-- Edit form for the current message -->
                                             <div class="modal-body">
-                                                <input class="form-control" type="text"
-                                                       placeholder="Celsius message"
+                                                <input class="form-control" type="hidden"
                                                @bind="objMessage.Id" />
                                                 <input class="form-control" type="text"
-                                                       placeholder="Fahrenheit message"
+                                                       placeholder="add message"
                                                @bind="objMessage.Text" />
-                                                <input class="form-control" type="text"
-                                                       placeholder="Summary"
+                                                <input class="form-control" type="hidden"
                                                @bind="objMessage.CreateAt" />
                                                 <br />
                                                 <!-- Button to save the message -->
