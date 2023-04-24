@@ -1,0 +1,193 @@
+﻿@page "/list-messages"
+@using ChatGptWizard.Data
+@inject MessageService MessageService
+
+<h1>List Messages (Sanity Test)</h1>
+@*<p style="color:red">@Error</p>*@
+@if (messages == null)
+{
+    <!-- Show this if the current user has no data... yet... -->
+    <p><em>Loading...</em></p>
+}else
+{
+    <!-- Show the messages for the current user -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Message Text</th>
+                <th>Date Created</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var message in messages)
+            {
+                <tr>
+                    <td>@message.Id</td>
+                    <td>@message.Text</td>
+                    <td>@message.CreateAt.ToShortDateString()</td>
+                    <td>
+                        <!-- Edit the current message -->
+                        <button class="btn btn-primary"
+                        @onclick="(() => EditMessage(message))">
+                            Edit
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>
+        <!-- Add a new message -->
+        <button class="btn btn-success"
+            @onclick="AddNewMessage">
+            Add New Message
+        </button>
+    </p>
+    @if (ShowPopup)
+    {
+        <!-- This is the popup to create or edit a message -->
+        <div class="modal" tabindex="-1" style="display:block" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Edit Message</h3>
+                        <!-- Button to close the popup -->
+                        <button type="button" class="close"
+                        @onclick="ClosePopup">
+                            <span aria-hidden="true">X</span>
+                        </button>
+                    </div>
+                    <!-- Edit form for the current message -->
+                    <div class="modal-body">
+                        <input class="form-control" type="text"
+                               placeholder="Celsius message"
+                       @bind="objMessage.Id" />
+                        <input class="form-control" type="text"
+                               placeholder="Fahrenheit message"
+                       @bind="objMessage.Text" />
+                        <input class="form-control" type="text"
+                               placeholder="Summary"
+                       @bind="objMessage.CreateAt" />
+                        <br />
+                        <!-- Button to save the message -->
+                        <button class="btn btn-success"
+                        @onclick="SaveMessage">
+                            Save
+                        </button>&nbsp;
+                        <!-- Only show delete button if not a new record -->
+                        @if (objMessage.Id > 0)
+                        {
+                            <!-- Button to delete the message -->
+                            <button class="btn btn-danger"
+                        @onclick="DeleteMessage">
+                                Delete
+                            </button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+@code{
+    string Error = "";
+    List<Message> messages = new List<Message>();
+    Message objMessage = new Message();
+    bool ShowPopup = false;
+    protected override async Task OnInitializedAsync()
+    {
+        // Get the messages
+        messages = await MessageService.GetMessageAsync();
+    }
+    void AddNewMessage()
+    {
+        // Make new forecast
+        objMessage = new Message();
+        // Set Id to 0 so we know it is a new record
+        objMessage.Id = 0;
+        // Open the Popup
+        ShowPopup = true;
+    }
+    void EditMessage(Message message)
+    {
+        // Set the selected forecast
+        // as the current forecast
+        objMessage = message;
+        // Open the Popup
+        ShowPopup = true;
+    }
+    //void AddNewMessage()
+    //{
+    //    // Make new forecast
+    //    objMessage = new Message();
+    //    // Set Id to 0 so we know it is a new record
+    //    objMessage.Id = 0;
+    //    // Open the Popup
+    //    ShowPopup = true;
+    //}
+    //void EditMessage(Message message)
+    //{
+    //    // Set the selected forecast
+    //    // as the current forecast
+    //    objMessage = message;
+    //    // Open the Popup
+    //    ShowPopup = true;
+    //}
+    void ClosePopup()
+    {
+        // Close the Popup
+        ShowPopup = false;
+    }
+    async Task SaveMessage()
+    {
+        // Close the Popup
+        ShowPopup = false;
+        Error = "";
+        try
+        {
+            // A new forecast will have the Id set to 0
+            if (objMessage.Id == 0)
+            {
+                // Create new forecast
+                Message objNewMessage = new Message();
+                objNewMessage.CreateAt = System.DateTime.Now;
+                objNewMessage.Text = objMessage.Text;
+                objNewMessage.Id = objMessage.Id;
+                // Save the result
+                var NewMessage =
+                await MessageService.CreateMessageAsync(objNewMessage);
+                // Add the Forcast
+                messages.Add(NewMessage);
+            }
+            else
+            {
+                // This is an update
+                await MessageService.UpdateMessageAsync(objMessage);
+            }
+        }
+        catch (Exception ex)
+        {
+            Error = ex.Message;
+        }
+    }
+    async Task DeleteMessage()
+    {
+        // Close the Popup
+        ShowPopup = false;
+        try
+        {
+            Error = "";
+            // Delete the forecast
+            await MessageService.DeleteMessageAsync(objMessage);
+            // Remove the Forcast
+            messages.Remove(objMessage);
+        }
+        catch (Exception ex)
+        {
+            Error = ex.Message;
+        }
+    }
+}
+}

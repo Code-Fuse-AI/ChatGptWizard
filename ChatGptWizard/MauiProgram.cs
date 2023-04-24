@@ -1,9 +1,5 @@
-﻿using ChatGptWizard.Core.Interfaces;
-using ChatGptWizard.Core.Services;
-using ChatGptWizard.Infrastructure.Context;
-using ChatGptWizard.Infrastructure.Interfaces;
-using ChatGptWizard.Infrastructure.Repository;
-using ChatGptWizard.Service;
+﻿using ChatGptWizard.Service;
+using ChatGptWizard.Data;
 using ChatGptWizard.Service.IService;
 using Microsoft.Extensions.Logging;
 using MudBlazor.Services;
@@ -21,11 +17,15 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 			});
-		//builder.Services.AddDbContext<AppDbContext>();
-		builder.Services.AddDbContext<ChatGptWizardDbContext>();
-		builder.Services.AddScoped<IMessageService, MessageService>();
-		builder.Services.AddScoped<IMessageRepository, MessageRepository>();
-		builder.Services.AddScoped<IExternalLibraryService, ExternalLibraryService>();
+        // Set path to the SQLite database (it will be created if it does not exist)
+        var dbPath =
+            Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                @"ChatGptWizard.db");
+        // Register MessageService and the SQLite database
+        builder.Services.AddSingleton<MessageService>(
+            s => ActivatorUtilities.CreateInstance<MessageService>(s, dbPath));
+        builder.Services.AddScoped<IExternalLibraryService, ExternalLibraryService>();
         builder.Services.AddScoped<IPromptService, PromptService>();
 
         builder.Services.AddMauiBlazorWebView();
