@@ -1,0 +1,84 @@
+﻿@page "/chat"
+@inject OpenAIApiService _openAIApiService
+
+<div class="justify-center pt-20">
+    <h1 class="text-2xl font-semibold">Chat with GPT</h1>
+
+    <MudTextField @bind-Value="ApiKey" Label="API Key" Variant="Variant.Outlined" />
+    <MudButton OnClick="ValidateApiKey" Color="Color.Primary">Validate API Key</MudButton>
+
+    @if (IsApiKeyValid)
+    {
+        <MudTextField @bind-Value="UserMessage" Label="Your Message" Variant="Variant.Outlined" />
+        <MudButton OnClick="SendMessage" Color="Color.Primary">Send Message</MudButton>
+
+        <div class="mt-4">
+            @if (!string.IsNullOrEmpty(GptResponse))
+            {
+                <p><strong>GPT Response:</strong></p>
+                <p>@GptResponse</p>
+            }
+        </div>
+
+        @if (!string.IsNullOrEmpty(ErrorMessage))
+        {
+            <div class="mt-4">
+                <p class="text-red-600"><strong>Error:</strong></p>
+                <p>@ErrorMessage</p>
+            </div>
+        }
+    }
+</div>
+
+@code {
+    private string ApiKey { get; set; }
+    private string UserMessage { get; set; }
+    private bool IsApiKeyValid { get; set; } = false;
+    private string GptResponse { get; set; }
+    private string ErrorMessage { get; set; }
+
+    private async Task ValidateApiKey()
+    {
+        if (string.IsNullOrEmpty(ApiKey))
+        {
+            ErrorMessage = "API Key is required.";
+            IsApiKeyValid = false;
+            return;
+        }
+
+        try
+        {
+            //await _openAIApiService.SendMessageAsync(ApiKey, "test", "text");
+            IsApiKeyValid = true;
+            ErrorMessage = null;
+        }
+        catch (Exception ex)
+        {
+            IsApiKeyValid = false;
+            ErrorMessage = ex.Message;
+        }
+    }
+
+    private async Task SendMessage()
+    {
+        if (string.IsNullOrEmpty(UserMessage))
+        {
+            ErrorMessage = "Message is required.";
+            return;
+        }
+
+        try
+        {
+            GptResponse = await _openAIApiService.SendMessageAsync(ApiKey, UserMessage, "text");
+            ErrorMessage = null;
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+    }
+}
+
+
+
+

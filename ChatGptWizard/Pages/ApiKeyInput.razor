@@ -1,0 +1,41 @@
+﻿@inject OpenAIApiService _openAIApiService
+
+<MudTextField @bind-Value="@apiKey" Label="API Key" />
+
+<MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="TestApiKey">
+    Test API Key
+</MudButton>
+
+@if (!string.IsNullOrEmpty(apiKeyValidationMessage))
+{
+    <MudAlert Severity="@apiKeyValidationSeverity" Dense="true" NoIcon="true">
+        @apiKeyValidationMessage
+    </MudAlert>
+}
+
+@code {
+    private string apiKey = "";
+    private string apiKeyValidationMessage = "";
+    private Severity apiKeyValidationSeverity = Severity.Normal;
+
+    private async void TestApiKey()
+    {
+        try
+        {
+            string testMessage = "This is a test message.";
+            var result = await _openAIApiService.SendMessageAsync(apiKey, testMessage, "text");
+
+            apiKeyValidationMessage = "API key is valid.";
+            apiKeyValidationSeverity = Severity.Success;
+        }
+        catch (Exception)
+        {
+            apiKeyValidationMessage = "API key is invalid.";
+            apiKeyValidationSeverity = Severity.Error;
+        }
+    }
+}
+
+
+
+

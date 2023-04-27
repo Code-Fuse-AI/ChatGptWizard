@@ -1,7 +1,8 @@
-﻿using ChatGptWizard.Service;
-using ChatGptWizard.Service.IService;
+﻿using ChatGptWizard.Service.IService;
 using Microsoft.Extensions.Logging;
 using MudBlazor.Services;
+using Microsoft.Extensions.DependencyInjection;
+using ChatGptWizard.Service;
 
 namespace ChatGptWizard;
 
@@ -24,12 +25,14 @@ public static class MauiProgram
         // Register MessageService and the SQLite database
         builder.Services.AddScoped<IMessageService>(
             s => ActivatorUtilities.CreateInstance<MessageService>(s, dbPath));
-        builder.Services.AddScoped<IExternalLibraryService, ExternalLibraryService>();
-        builder.Services.AddScoped<IPromptService, PromptService>();
+
+        builder.Services.AddScoped<OpenAIApiService>();
+        builder.Services.AddScoped(sp => new HttpClient());
+
+
 
         builder.Services.AddMauiBlazorWebView();
         builder.Services.AddMudServices();
-
 
 #if DEBUG
         builder.Services.AddBlazorWebViewDeveloperTools();

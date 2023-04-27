@@ -3,11 +3,15 @@
     <MudDrawerHeader>
         <MudText Typo="Typo.h5" Color="Color.Default" Style="margin-top:15px; margin-left:5px;">ChatGpt Wizard</MudText>
     </MudDrawerHeader>
+    <MudDivider DividerType="DividerType.Middle" Class="my-6" />
     <MudNavMenu>
-        <MudDivider DividerType="DividerType.Middle" Class="my-6" />
-        <MudNavLink Href="/" Match="NavLinkMatch.All"></MudNavLink>
-        <MudDivider DividerType="DividerType.Middle" Class="my-6" />
+        <MudNavGroup Title="Testing" Expanded="true" Color="Color.Dark">
+            <MudNavLink Href="/list-messages" Match="NavLinkMatch.Prefix">Message List</MudNavLink>
+            <MudNavLink Href="/apikeyinput" Match="NavLinkMatch.Prefix">ApiKey Management</MudNavLink>
+            <MudNavLink Href="/chat" Match="NavLinkMatch.Prefix">Chat</MudNavLink>
+        </MudNavGroup>
     </MudNavMenu>
+    <MudDivider DividerType="DividerType.Middle" Class="my-6" />
 </MudDrawer>
 
 @code {
