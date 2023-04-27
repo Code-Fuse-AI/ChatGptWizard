@@ -27,12 +27,12 @@ namespace ChatGptWizard.Service
                 temperature = 0.5,
                 n = 1,
                 stop = "\n",
-                model = "text-davinci-002",
+                model = "gpt-3.5-turbo",
             };
 
             var content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("https://api.openai.com/v1/engines/davinci-codex/completions", content);
+            var response = await _httpClient.PostAsync("https://api.openai.com/v1/chat/completions", content);
 
             if (!response.IsSuccessStatusCode)
             {
