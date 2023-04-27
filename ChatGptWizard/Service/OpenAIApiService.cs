@@ -11,10 +11,19 @@ namespace ChatGptWizard.Service
     {
         private readonly HttpClient _httpClient;
 
+        //public OpenAIApiService(HttpClient httpClient)
+        //{
+        //    _httpClient = httpClient;
+        //}
+
         public OpenAIApiService(HttpClient httpClient)
         {
             _httpClient = httpClient;
+            _httpClient.BaseAddress = new Uri("https://api.openai.com/");
+            _httpClient.DefaultRequestHeaders.Accept.Clear();
+            _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
+
 
         public async Task<string> SendMessageAsync(string apiKey, string prompt, string responseType)
         {
@@ -32,7 +41,7 @@ namespace ChatGptWizard.Service
 
             var content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("https://api.openai.com/v1/chat/completions", content);
+            var response = await _httpClient.PostAsync("v1/chat/completions", content);
 
             if (!response.IsSuccessStatusCode)
             {
