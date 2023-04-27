@@ -63,8 +63,13 @@
 
     <ItemGroup>
       <None Remove="cssStyles\" />
+      <None Remove="Models\" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="cssStyles\" />
+      <Folder Include="Models\" />
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Remove="Models\Prompt.cs" />
     </ItemGroup>
 </Project>
