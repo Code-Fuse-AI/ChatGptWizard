@@ -1,5 +1,4 @@
 ﻿using ChatGptWizard.Service;
-using ChatGptWizard.Data;
 using ChatGptWizard.Service.IService;
 using Microsoft.Extensions.Logging;
 using MudBlazor.Services;
@@ -23,7 +22,7 @@ public static class MauiProgram
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 @"ChatGptWizard.db");
         // Register MessageService and the SQLite database
-        builder.Services.AddSingleton<MessageService>(
+        builder.Services.AddScoped<IMessageService>(
             s => ActivatorUtilities.CreateInstance<MessageService>(s, dbPath));
         builder.Services.AddScoped<IExternalLibraryService, ExternalLibraryService>();
         builder.Services.AddScoped<IPromptService, PromptService>();

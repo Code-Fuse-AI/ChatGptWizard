@@ -71,7 +71,5 @@
     <ItemGroup>
       <Folder Include="cssStyles\" />
       <Folder Include="Models\" />
-      <Folder Include="Service\" />
-      <Folder Include="Service\IService\" />
     </ItemGroup>
 </Project>
