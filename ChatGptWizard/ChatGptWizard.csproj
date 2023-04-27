@@ -63,15 +63,8 @@
 
     <ItemGroup>
       <None Remove="cssStyles\" />
-      <None Remove="Data\" />
-      <None Remove="Models\" />
-      <None Remove="Services\" />
-      <None Remove="Service\IService\" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="cssStyles\" />
-      <Folder Include="Models\" />
-      <Folder Include="Service\" />
-      <Folder Include="Service\IService\" />
     </ItemGroup>
 </Project>
