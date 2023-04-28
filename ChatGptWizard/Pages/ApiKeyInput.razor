@@ -31,7 +31,8 @@
 
         try
         {
-            var response = await _openAIApiService.SendMessageAsync(ApiKey, "Congratulate me on successfully entering my API keys");
+            _openAIApiService.SetApiKey(ApiKey);
+            var response = await _openAIApiService.SendMessageAsync("Congratulate me on successfully entering my API keys");
             snackBar.Add($"API key is valid. Response: {response}", Severity.Success);
             IsApiKeyValid = true;
         }
@@ -51,7 +52,7 @@
 
         try
         {
-            var response = await _openAIApiService.SendMessageAsync(ApiKey, UserMessage);
+            var response = await _openAIApiService.SendMessageAsync(UserMessage);
             snackBar.Add($"GPT Response: {response}", Severity.Info);
         }
         catch (Exception ex)
@@ -60,6 +61,7 @@
         }
     }
 }
+
 
 
 

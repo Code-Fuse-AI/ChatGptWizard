@@ -5,12 +5,13 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-
 namespace ChatGptWizard.Service
 {
     public class OpenAIApiService
     {
         private readonly HttpClient _httpClient;
+
+        public string ApiKey { get; private set; }
 
         public OpenAIApiService(HttpClient httpClient)
         {
@@ -20,10 +21,14 @@ namespace ChatGptWizard.Service
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<string> SendMessageAsync(string apiKey, string prompt)
+        public void SetApiKey(string apiKey)
         {
+            ApiKey = apiKey;
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
+        }
 
+        public async Task<string> SendMessageAsync(string prompt)
+        {
             var requestBody = new
             {
                 model = "gpt-3.5-turbo",
@@ -50,6 +55,7 @@ namespace ChatGptWizard.Service
         }
     }
 }
+
 
 
 
