@@ -5,16 +5,12 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
+
 namespace ChatGptWizard.Service
 {
     public class OpenAIApiService
     {
         private readonly HttpClient _httpClient;
-
-        //public OpenAIApiService(HttpClient httpClient)
-        //{
-        //    _httpClient = httpClient;
-        //}
 
         public OpenAIApiService(HttpClient httpClient)
         {
@@ -24,19 +20,16 @@ namespace ChatGptWizard.Service
             _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-
-        public async Task<string> SendMessageAsync(string apiKey, string prompt, string responseType)
+        public async Task<string> SendMessageAsync(string apiKey, string prompt)
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
 
             var requestBody = new
             {
-                prompt = prompt,
-                max_tokens = 150,
-                temperature = 0.5,
-                n = 1,
-                stop = "\n",
                 model = "gpt-3.5-turbo",
+                messages = new[] { new { role = "user", content = prompt } },
+                temperature = 0.7,
+                max_tokens = 150,
             };
 
             var content = new StringContent(JsonSerializer.Serialize(requestBody), Encoding.UTF8, "application/json");
@@ -49,13 +42,15 @@ namespace ChatGptWizard.Service
             }
 
             var jsonResponse = await response.Content.ReadAsStringAsync();
+            Console.WriteLine(jsonResponse); // Log the full API response to the console
 
-            var result = JsonDocument.Parse(jsonResponse).RootElement.GetProperty("choices")[0].GetProperty(responseType).GetString();
+            var result = JsonDocument.Parse(jsonResponse).RootElement.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString();
 
             return result;
         }
     }
 }
+
 
 
 
