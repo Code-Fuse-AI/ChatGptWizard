@@ -17,10 +17,8 @@ To get started with ChatGPTWizard, follow these steps:
 
 **Please note that ChatGPTWizard is currently in the early stages of development and is not yet production-ready. However, we welcome feedback and contributions from the community to help us improve and add more features.**
 Clone this repository to your local machine.
-Install the .NET 6 SDK.
-Install the Maui CLI.
-Install the Blazor WebAssembly templates.
-Run the app with maui watch command.
+Install the .NET 7 SDK.
+Install Blazor Hybrid and All MAUI dependencies
 <div align="center">Contributing</div>
 We welcome contributions from the community! If you would like to contribute to ChatGPTWizard, please follow these steps:
 
