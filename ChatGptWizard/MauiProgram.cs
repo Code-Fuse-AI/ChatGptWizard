@@ -25,6 +25,9 @@ public static class MauiProgram
         // Register MessageService and the SQLite database
         builder.Services.AddScoped<IMessageService>(
             s => ActivatorUtilities.CreateInstance<MessageService>(s, dbPath));
+        builder.Services.AddScoped<ITopicService>(s => ActivatorUtilities.CreateInstance<TopicService>(s, dbPath));
+        builder.Services.AddScoped<ICategoryService>(s => ActivatorUtilities.CreateInstance<CategoryService>(s, dbPath));
+        builder.Services.AddScoped<IPromptService>(s => ActivatorUtilities.CreateInstance<PromptService>(s, dbPath));
 
         builder.Services.AddScoped<OpenAIApiService>();
         builder.Services.AddScoped(sp => new HttpClient());
