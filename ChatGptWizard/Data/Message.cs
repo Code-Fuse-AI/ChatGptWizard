@@ -2,6 +2,7 @@
 
 namespace ChatGptWizard.Data
 {
+    [Table("Messages")]
     public class Message
     {
         [PrimaryKey, AutoIncrement]
