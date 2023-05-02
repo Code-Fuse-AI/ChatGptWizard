@@ -3,10 +3,11 @@
 
 
 <MudAppBar Elevation="21" Dense="true">
-    <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Dark" Size="Size.Medium" Edge="Edge.End"
+    <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Primary" Size="Size.Medium" Edge="Edge.Start"
                    OnClick="async () => await OnSidebarToggled.InvokeAsync()" />
     <MudSpacer />
-    <MudIconButton Href="/" Icon="@Icons.Material.Filled.Home" Color="Color.Dark" Size="Size.Medium" />
+    <MudIconButton Href="/settings" Icon="@Icons.Material.Filled.MoreVert" Color="Color.Primary" Size="Size.Medium" />
+    <MudIconButton Href="/" Icon="@Icons.Material.Filled.Home" Color="Color.Primary" Size="Size.Medium" Edge="Edge.End" />
 </MudAppBar>
 
 

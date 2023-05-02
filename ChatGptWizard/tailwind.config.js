@@ -19,7 +19,16 @@ module.exports = {
                 'PrimaryLighten': '#8FB5CA', // lighter shade of pastel blue
                 'Secondary': '#A9A9A9', // added secondary gray color
                 'GrayLight': '#F5F5F5',
-                'Surface': '#FFFFFF', // Card bg color
+                'Surface': '#FAFAFA', // Card bg color
+                'Black': '#000000',
+                'White': '#FFFFFF',
+                'TextPrimary': '#000000',
+                'AppbarBackground': '#FFFFFF',
+                'TextSecondary': '#757575',
+                'AppbarText': '#000000',
+                'DrawerBackground': '#FAFAFA',
+                'DrawerText': '#000000',
+                'DrawerIcon': '#000000'
             },
         },
     },
