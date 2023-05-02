@@ -6,7 +6,7 @@
 
 <MudLayout Color="Color.Dark">
     <AppBar OnSidebarToggled="ToggleSidebar" />
-    <NavMenu SideBarOpen="_sidebarOpen" />
+    <ChatMenu SideBarOpen="_sidebarOpen" />
     <MudMainContent Class="pt-n4">
         <MudSwitch @bind-Checked="@_isDarkMode" Color="Color.Default" Class="justify-center"  Elevation="10" T="bool" Label="Light/Dark Mode" />
         @Body
@@ -59,7 +59,7 @@
 
         LayoutProperties = new LayoutProperties()
         {
-            DrawerWidthLeft = "600px",
+            DrawerWidthLeft = "400px",
             //DrawerWidthRight = "300px"
         }
     };

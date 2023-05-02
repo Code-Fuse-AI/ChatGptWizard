@@ -1,5 +1,6 @@
 ﻿@page "/api-key-input"
 @inject OpenAIApiService _openAIApiService
+@inject NavigationManager _navigationManager
 @inject MudBlazor.ISnackbar snackBar
 
 <div class="justify-center pt-20">
@@ -14,6 +15,13 @@
         <MudButton OnClick="SendMessage" Color="Color.Primary">Send Message</MudButton>
     }
 </div>
+
+<div class="flex justify-center">
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _navigationManager.NavigateTo("/"))">
+        Go Back
+    </MudButton>
+</div>
+
 
 @code {
     private string ApiKey { get; set; }
